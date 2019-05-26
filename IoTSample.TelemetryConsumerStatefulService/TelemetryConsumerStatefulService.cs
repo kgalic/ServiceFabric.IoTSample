@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using IoTSample.Communication;
 using Microsoft.Azure.EventHubs;
 using Microsoft.Azure.ServiceBus;
 using Microsoft.ServiceFabric.Data;
 using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Client;
+using Microsoft.ServiceFabric.Services.Communication.Client;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
@@ -114,6 +116,9 @@ namespace IoTSample.TelemetryConsumerStatefulService
                                         "Reading data from device {0} with data {1}",
                                         deviceId,
                                         data);
+
+                            var message = new Message(eventData.Body.Array);
+
 
                             if (++offsetIteration % OffsetInterval == 0)
                             {
