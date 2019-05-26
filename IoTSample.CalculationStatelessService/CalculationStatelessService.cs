@@ -33,7 +33,11 @@ namespace IoTSample.CalculationStatelessService
                 connectionString,
                 queueName), "StatelessService.QueueListener");
         }
-
+        
+        /// <summary>
+        /// Override to handle exceptions occured by message receiver.
+        /// </summary>
+        /// <returns>Task</returns>
         public Task HandleMessageReceivedFailedException(Exception e)
         {
             ServiceEventSource.Current.ServiceMessage(
@@ -43,6 +47,10 @@ namespace IoTSample.CalculationStatelessService
             return Task.FromResult(true);
         }
 
+        /// <summary>
+        /// Override to handle messages from service bus queue.
+        /// </summary>
+        /// <returns>Task</returns>
         public Task ReceiveMessageAsync(Message message)
         {
             var messageString = System.Text.Encoding.Default.GetString(message.Body.ToArray());
