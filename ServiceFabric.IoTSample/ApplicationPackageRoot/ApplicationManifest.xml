@@ -1,12 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ApplicationManifest ApplicationTypeName="ServiceFabric.IoTSampleType"
-                     ApplicationTypeVersion="1.0.0"
-                     xmlns="http://schemas.microsoft.com/2011/01/fabric"
-                     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="ServiceFabric.IoTSampleType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
     <Parameter Name="IoTSample.TelemetryConsumerStatefulService_MinReplicaSetSize" DefaultValue="3" />
-    <Parameter Name="IoTSample.TelemetryConsumerStatefulService_PartitionCount" DefaultValue="1" />
+    <Parameter Name="IoTSample.TelemetryConsumerStatefulService_PartitionCount" DefaultValue="2" />
     <Parameter Name="IoTSample.TelemetryConsumerStatefulService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
@@ -24,7 +20,7 @@
          The attribute ServiceTypeName below must match the name defined in the imported ServiceManifest.xml file. -->
     <Service Name="IoTSample.TelemetryConsumerStatefulService" ServicePackageActivationMode="ExclusiveProcess">
       <StatefulService ServiceTypeName="IoTSample.TelemetryConsumerStatefulServiceType" TargetReplicaSetSize="[IoTSample.TelemetryConsumerStatefulService_TargetReplicaSetSize]" MinReplicaSetSize="[IoTSample.TelemetryConsumerStatefulService_MinReplicaSetSize]">
-        <UniformInt64Partition PartitionCount="[IoTSample.TelemetryConsumerStatefulService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+        <UniformInt64Partition PartitionCount="[IoTSample.TelemetryConsumerStatefulService_PartitionCount]" LowKey="0" HighKey="1" />
       </StatefulService>
     </Service>
   </DefaultServices>
