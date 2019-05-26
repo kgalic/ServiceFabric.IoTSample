@@ -119,6 +119,12 @@ namespace IoTSample.TelemetryConsumerStatefulService
 
                             var message = new Message(eventData.Body.Array);
 
+                            //TODO: Avoid hardcoded values, place in app settings
+                            Uri statelessServiceUri = new Uri("fabric:/ServiceFabric.IoTSample/IoTSample.CalculationStatelessService");
+                            var statelessServiceFactory = new ServiceBusCommunicationClientFactory(ServicePartitionResolver.GetDefault(), "name of the queue");
+                            var statelessServicePartitionClient = new ServicePartitionClient<ServiceBusCommunicationClient>(statelessServiceFactory, statelessServiceUri);
+                            await statelessServicePartitionClient.InvokeWithRetryAsync(c => c.SendMessageAsync(message));
+
 
                             if (++offsetIteration % OffsetInterval == 0)
                             {
