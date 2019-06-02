@@ -125,6 +125,13 @@ namespace IoTSample.TelemetryConsumerStatefulService
                             var statelessServicePartitionClient = new ServicePartitionClient<ServiceBusCommunicationClient>(statelessServiceFactory, statelessServiceUri);
                             await statelessServicePartitionClient.InvokeWithRetryAsync(c => c.SendMessageAsync(message));
 
+                            //TODO: Avoid hardcoded values, place in app settings
+                            Uri statefulServiceUri = new Uri("fabric:/ServiceFabric.IoTSample/IoTSample.ProcessingStatefulService");
+                            var statefulServiceFactory = new ServiceBusCommunicationClientFactory(ServicePartitionResolver.GetDefault(), "name of the queue");
+                            var partitionKey = new ServicePartitionKey(0L);
+                            var statefulServicePartitionClient = new ServicePartitionClient<ServiceBusCommunicationClient>(statefulServiceFactory, statefulServiceUri, partitionKey);
+                            await statefulServicePartitionClient.InvokeWithRetryAsync(c => c.SendMessageAsync(message.Clone()));
+
 
                             if (++offsetIteration % OffsetInterval == 0)
                             {

@@ -6,34 +6,38 @@ using System.Threading;
 using System.Threading.Tasks;
 using IoTSample.Communication;
 using Microsoft.Azure.ServiceBus;
+using Microsoft.ServiceFabric.Data.Collections;
 using Microsoft.ServiceFabric.Services.Communication.Runtime;
 using Microsoft.ServiceFabric.Services.Runtime;
 
-namespace IoTSample.CalculationStatelessService
+namespace IoTSample.ProcessingStatefulService
 {
     /// <summary>
-    /// An instance of this class is created for each service instance by the Service Fabric runtime.
+    /// An instance of this class is created for each service replica by the Service Fabric runtime.
     /// </summary>
-    internal sealed class CalculationStatelessService : StatelessService, IServiceBusMessageReceiver
+    internal sealed class ProcessingStatefulService : StatefulService, IServiceBusMessageReceiver
     {
-        public CalculationStatelessService(StatelessServiceContext context)
+        public ProcessingStatefulService(StatefulServiceContext context)
             : base(context)
         { }
 
         /// <summary>
-        /// Optional override to create listeners (e.g., TCP, HTTP) for this service replica to handle client or user requests.
+        /// Optional override to create listeners (e.g., HTTP, Service Remoting, WCF, etc.) for this service replica to handle client or user requests.
         /// </summary>
+        /// <remarks>
+        /// For more information on service communication, see https://aka.ms/servicefabricservicecommunication
+        /// </remarks>
         /// <returns>A collection of listeners.</returns>
-        protected override IEnumerable<ServiceInstanceListener> CreateServiceInstanceListeners()
+        protected override IEnumerable<ServiceReplicaListener> CreateServiceReplicaListeners()
         {
             var connectionString = "service bus connection string from Shared Access Policies <- Azure portal";
             var queueName = "name of the queue";
-            yield return new ServiceInstanceListener(context => new ServiceBusCommunicationListener(
+            yield return new ServiceReplicaListener(context => new ServiceBusCommunicationListener(
                 this,
                 connectionString,
-                queueName), "StatelessService.QueueListener");
+                queueName), "StatefulService.QueueListener");
         }
-        
+
         /// <summary>
         /// Override to handle exceptions occured by message receiver.
         /// </summary>
@@ -42,7 +46,7 @@ namespace IoTSample.CalculationStatelessService
         {
             ServiceEventSource.Current.ServiceMessage(
                                           this.Context,
-                                          "Exception occured is Stateless Calculation Service: {0}",
+                                          "Exception occured in Stateful Processing Service: {0}",
                                           e.Message);
             return Task.FromResult(true);
         }
@@ -56,7 +60,7 @@ namespace IoTSample.CalculationStatelessService
             var messageString = System.Text.Encoding.Default.GetString(message.Body.ToArray());
             ServiceEventSource.Current.ServiceMessage(
                                           this.Context,
-                                          "Received Message in Stateles Calculation Service: {0}",
+                                          "Received Message in Stateful Processing Service: {0}",
                                           messageString);
             return Task.FromResult(true);
         }

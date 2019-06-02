@@ -33,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\IoTSample.CalculationStatelessService\IoTSample.CalculationStatelessService.csproj" />
+    <ProjectReference Include="..\IoTSample.ProcessingStatefulService\IoTSample.ProcessingStatefulService.csproj" />
     <ProjectReference Include="..\IoTSample.TelemetryConsumerStatefulService\IoTSample.TelemetryConsumerStatefulService.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

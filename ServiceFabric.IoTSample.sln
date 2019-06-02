@@ -7,9 +7,11 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "ServiceFabric.IoTSample", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSample.TelemetryConsumerStatefulService", "IoTSample.TelemetryConsumerStatefulService\IoTSample.TelemetryConsumerStatefulService.csproj", "{70F8C101-BF99-4C38-AFB2-FC5594290B6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTSample.Communication", "IoTSample.Communication\IoTSample.Communication.csproj", "{E76D61CA-8CB9-44BB-9E4E-579F4BF15371}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSample.Communication", "IoTSample.Communication\IoTSample.Communication.csproj", "{E76D61CA-8CB9-44BB-9E4E-579F4BF15371}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTSample.CalculationStatelessService", "IoTSample.CalculationStatelessService\IoTSample.CalculationStatelessService.csproj", "{5B2E58C0-F74C-4786-B136-719BEED9D301}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IoTSample.CalculationStatelessService", "IoTSample.CalculationStatelessService\IoTSample.CalculationStatelessService.csproj", "{5B2E58C0-F74C-4786-B136-719BEED9D301}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IoTSample.ProcessingStatefulService", "IoTSample.ProcessingStatefulService\IoTSample.ProcessingStatefulService.csproj", "{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{5B2E58C0-F74C-4786-B136-719BEED9D301}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B2E58C0-F74C-4786-B136-719BEED9D301}.Release|x64.ActiveCfg = Release|Any CPU
 		{5B2E58C0-F74C-4786-B136-719BEED9D301}.Release|x64.Build.0 = Release|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Debug|x64.Build.0 = Debug|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Release|x64.ActiveCfg = Release|Any CPU
+		{DB5B5D69-F5D0-4BFE-AE05-48446A26F991}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
